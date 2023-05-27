@@ -98,6 +98,7 @@ def load_model(
     num_gpus: int,
     max_gpu_memory: Optional[str] = None,
     load_8bit: bool = False,
+    load_4bit: boot = False,
     cpu_offloading: bool = False,
     debug: bool = False,
 ):
@@ -199,6 +200,9 @@ def add_model_args(parser):
     )
     parser.add_argument(
         "--load-8bit", action="store_true", help="Use 8-bit quantization"
+    )
+    parser.add_argument(
+        "--load-8bit", action="store_true", help="Use 4-bit quantization"
     )
     parser.add_argument(
         "--cpu-offloading",
