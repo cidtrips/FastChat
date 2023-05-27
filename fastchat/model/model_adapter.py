@@ -98,7 +98,7 @@ def load_model(
     num_gpus: int,
     max_gpu_memory: Optional[str] = None,
     load_8bit: bool = False,
-    load_4bit: boot = False,
+    load_4bit: bool = False,
     cpu_offloading: bool = False,
     debug: bool = False,
 ):
@@ -112,7 +112,7 @@ def load_model(
         kwargs = {"torch_dtype": torch.float32}
     elif device == "cuda":
         kwargs = {"torch_dtype": torch.float16}
-        if num_gpus != 1:
+        if num_gpus !=  or load_4bit:
             kwargs["device_map"] = "auto"
             if max_gpu_memory is None:
                 kwargs[
@@ -125,6 +125,8 @@ def load_model(
                 }
             else:
                 kwargs["max_memory"] = {i: max_gpu_memory for i in range(num_gpus)}
+            if load_4bit:
+                kwargs["load_in_4bit"] = load_4bit
     elif device == "mps":
         kwargs = {"torch_dtype": torch.float16}
         # Avoid bugs in mps backend by not using in-place operations.
