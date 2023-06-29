@@ -204,7 +204,7 @@ def add_model_args(parser):
         "--load-8bit", action="store_true", help="Use 8-bit quantization"
     )
     parser.add_argument(
-        "--load-8bit", action="store_true", help="Use 4-bit quantization"
+        "--load-4bit", action="store_true", help="Use 4-bit quantization"
     )
     parser.add_argument(
         "--cpu-offloading",
